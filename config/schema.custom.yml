@@ -2,3 +2,7 @@ propel:
   _attributes:
     package: lib.model
     defaultIdMethod: native
+
+  Categoria_Autos:
+    Tipo_Auto: { primaryString: true }
+    

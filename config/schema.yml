@@ -1,0 +1,51 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  Autos:
+    _attributes: { phpName: Autos, idMethod: native }
+    Modelo: { phpName: Modelo, type: VARCHAR, size: '80', required: true }
+    color: { phpName: Color, type: VARCHAR, size: '30', required: true }
+    anio_auto: { phpName: AnioAuto, type: INTEGER, size: '4', required: true }
+    Id: { phpName: Id, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    Patente: { phpName: Patente, type: VARCHAR, size: '15', required: true, index: unique }
+    Imagen: { phpName: Imagen, type: BLOB, required: false }
+    chasis: { phpName: Chasis, type: VARCHAR, size: '17', required: true }
+    Venc_Seguro: { phpName: VencSeguro, type: DATE, required: true }
+    Categoria: { phpName: Categoria, type: CHAR, required: true, foreignTable: Categoria_Autos, foreignReference: Clase_Auto }
+    _indexes: { fk_Autos_Categoria_Autos1: [Categoria] }
+    _uniques: { chasis: [chasis] }
+  Categoria_Autos:
+    _attributes: { phpName: CategoriaAutos, idMethod: native }
+    Id: { phpName: Id, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
+    Tipo_Auto: { phpName: TipoAuto, type: VARCHAR, size: '30', required: true }
+    Clase_Auto: { phpName: ClaseAuto, type: CHAR, required: true }
+    _uniques: { Clase_Auto: [Clase_Auto] }
+  Choferes:
+    _attributes: { phpName: Choferes, idMethod: native }
+    Nombre: { phpName: Nombre, type: VARCHAR, size: '50', required: true }
+    Licencia: { phpName: Licencia, type: INTEGER, primaryKey: true, required: true }
+    Domicilio: { phpName: Domicilio, type: VARCHAR, size: '50', required: true }
+    Vencimiento_Lic: { phpName: VencimientoLic, type: DATE, required: true }
+    Clase: { phpName: Clase, type: CHAR, required: true, foreignTable: Categoria_Autos, foreignReference: Clase_Auto }
+    _indexes: { fk_Choferes_Categoria_Autos1: [Clase] }
+  Estado_Auto:
+    _attributes: { phpName: EstadoAuto, idMethod: native }
+    Auto: { phpName: Auto, type: INTEGER, primaryKey: true, required: true, foreignTable: Autos, foreignReference: Id }
+    Conductor: { phpName: Conductor, type: INTEGER, required: false, foreignTable: Choferes, foreignReference: Licencia }
+    Disponibilidad: { phpName: Disponibilidad, type: CHAR, sqlType: 'enum(''SI'',''NO'')', required: true }
+    Destino: { phpName: Destino, type: VARCHAR, size: '50', required: false }
+    _indexes: { fk_Estado_Auto_Choferes1: [Conductor] }
+  Mantenimiento:
+    _attributes: { phpName: Mantenimiento, idMethod: native }
+    Id_Auto: { phpName: IdAuto, type: INTEGER, primaryKey: true, required: true, foreignTable: Autos, foreignReference: Id }
+    Codigo_Mant: { phpName: CodigoMant, type: INTEGER, required: true }
+    Kilometraje: { phpName: Kilometraje, type: INTEGER, required: true }
+    Fecha_Service: { phpName: FechaService, type: DATE, required: true }
+    Detalles: { phpName: Detalles, type: VARCHAR, size: '500', required: true }
+    Precio: { phpName: Precio, type: DECIMAL, scale: '0', required: true }
+  Usuarios:
+    _attributes: { phpName: Usuarios, idMethod: native }
+    Nombre: { phpName: Nombre, type: VARCHAR, size: '50', required: true }
+    Contrasenia: { phpName: Contrasenia, type: VARCHAR, size: '15', required: true }
+    Cargo: { phpName: Cargo, type: VARCHAR, size: '30', required: true }

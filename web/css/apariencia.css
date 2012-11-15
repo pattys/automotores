@@ -1,0 +1,208 @@
+/* 
+    Document   : apariencia
+    Created on : 17-10-2012, 03:10:47 PM
+    Author     : patty
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body{
+ 
+    background-image: url(../images/TEXTURA.jpg);
+}
+
+#cabecera{
+width: 800px;
+height:100px;    
+}
+
+#text_cabecera{
+font-family: 'Crete Round',Arial,Helvetica,sans-serif;
+vertical-align: middle;
+color: #ffffff;
+font-size: 25px;
+text-align: left;
+text-shadow: 2px 2px 2px #000000;
+padding: 10px;
+float: left;
+margin-left: 10px;
+margin-top: 30px; 
+}
+
+#img_cabecera{
+float: right;
+padding: 20px;
+margin-bottom: 10px;
+margin: 0px 10px 10px 0px ;
+}
+
+#contenedor{
+background-color: #ABABAC;
+background-image: url(../images/contenedor1.png);
+background-position: center center;
+border-radius: 10px;
+width: 800px;
+height: 310px;
+margin-top: 25px;
+box-shadow: 10px 10px 15px #000000;
+}
+
+#login{
+font-size: 20px;
+font-family: 'Crete Round',Arial,Helvetica,sans-serif;
+color: #EEEEEE;
+text-align: left;
+float: left;
+padding: 20px;
+margin: 20px 0px 0px 30px;
+    
+}
+
+#creditos{
+font-family: 'Crete Round',Arial,Helvetica,sans-serif;
+font-size: 16px;
+color:#FFFFFF;
+text-align: left;
+text-shadow: 2px 2px #120D0D;
+padding: 20px;
+margin: 30px 0px 30px 90px;
+float:left;
+}
+
+/*a{    
+    font-family: Arial;
+    font-size: 36px;
+    text-decoration: none;
+}*/
+
+#menu-soft {
+width: 800px;
+padding:0;
+color:#d9d9d9;
+font-family: Arial;
+overflow:hidden;
+background:#222;
+}
+
+#menu-soft ul {
+width:800px;
+margin:auto;
+}
+
+
+#menu-soft a {
+color:#d9d9d9;
+font-weight:normal;
+font-size: 36px;
+text-decoration: none;
+}
+
+#menu-soft ul {
+list-style:none;
+display:block;
+margin:0;
+padding:0;
+}
+
+#menu-soft li {
+float:left;
+padding:10px;
+display:block;
+width:100px;
+border-left:1px solid #2d2d2d;
+/*Duración de transiciones*/
+-moz-transition: 0.7s;
+-webkit-transition: 0.7s;
+-o-transition:0.7s;
+transition: 0.7s;
+}
+
+#menu-soft li:hover {
+padding-left:50px;
+cursor:pointer;
+background:#1bb1bb;
+}
+#menu-soft li:hover a {
+color:#fff;
+text-shadow:1px 1px #222, 2px 2px #222; 3px 3px #222; 4px 4px #222;
+}
+
+#menu-soft li span {
+font-size:15px;
+}
+
+#contenedor_tabla{
+float: left;
+padding: 20px;
+margin: 15px 0px 0px 30px;
+overflow: auto;
+width: 700px;
+height: 230px;  
+}
+
+td{
+    font-family: Arial;
+    font-size: 18px;
+    text-align: left;
+    vertical-align: middle;
+    color: #EEEEEE;
+}
+
+th{
+    font-family: Arial;
+    font-size: 18px;
+    text-align: left;
+    color: #EEEEEE;
+}
+
+.imgdesc{
+float: left;
+margin: 55px 0px 0px 100px;
+width: 250px;
+height: 200px;
+position: relative;
+}
+
+.imgdesc_der{
+float: left;
+margin: 55px 0px 0px 100px;
+width: 250px;
+height: 200px;
+position: relative;
+}
+
+.desc{
+position: absolute;
+float: left;
+margin: 216px 0px 0px 100px;
+width: 250px;
+height: 40px;
+background: #2C2C2C;
+opacity: .7;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 15px;
+text-align: center;
+vertical-align: middle;
+text-decoration: none;
+color: white; 
+}
+
+.desc_der{
+position: absolute;
+float: left;
+margin: 216px 0px 0px 100px;
+width: 250px;
+height: 40px;
+background: #2C2C2C;
+opacity: .7;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 15px;
+text-align: center;
+vertical-align: middle;
+text-decoration: none;
+color: white; 
+}

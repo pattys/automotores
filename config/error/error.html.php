@@ -13,19 +13,19 @@
 
 </head>
 <body>
-  <h1>Server error</h1>
-  <h5>The server returned an error: "<?php echo $code ?> <?php echo $text ?>".</h5>
+  <h1>Error del servidor</h1>
+  <h5>El servidor devolvió un error: "<?php echo $code ?> <?php echo $text ?>".</h5>
 
   <dl>
-    <dt>An unexpected error ocurred, and the server cannot perform the requested operation.
-        In most cases, it means an issue that needs to be fixed.</dt>
-    <dd>If the error persists, please notify the system administrator.</dd>
+    <dt>Ha ocurrido un error imprevisto y el servidor no pudo completar la operación.
+        Por lo general, suele tratarse de una situación que requiere ser corregida.</dt>
+    <dd>Si el error persiste, por favor notifique al administrador del sistema.</dd>
 
-    <dt>Meanwhile, you can:</dt>
+    <dt>Mientras tanto, Ud. puede:</dt>
     <dd>
       <ul>
-        <li><a href="javascript:history.back();">Go back</a> to the previous page</li>
-        <li>Go to the <a href="<?php echo $path;?>">Home Page</a> and start again from there.</li>
+        <li><a href="javascript:history.back();">Regresar</a> a la página anterior</li>
+        <li>Ir a la <a href="<?php echo $path;?>">Página de inicio</a> y comenzar de nuevo.</li>
       </ul>
     </dd>
   </dl>

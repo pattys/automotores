@@ -36,8 +36,9 @@
           </a>
           <div class="nav-collapse">
           <?php if(!include_slot('layout_header')):?>
-            <a class="brand" href="#">Project name</a>
-            <?php include_partial('default/menu');?>
+              <a class="brand" href="<?php echo url_for("pro_uni/uni");?>">Proyecto Universitario</a>
+           <!--bueno esto son enlaces ala pagina Uni del stop asi se hace el modulo y luego la accion pero en PHPPPP---> 
+               <?php include_partial('default/menu');?>
           <?php endif;?>
           </div><!--/.nav-collapse -->
         </div>
@@ -48,7 +49,7 @@
       <hr>
       <footer>
       <?php if(!include_slot('layout_footer')):?>
-        <p>&copy; Company 2012</p>
+        <p>&copy; Compania 2012</p>
       <?php endif;?>
       </footer>
     </div> <!-- /container -->
