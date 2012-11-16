@@ -49,7 +49,7 @@
       <hr>
       <footer>
       <?php if(!include_slot('layout_footer')):?>
-        <p>&copy; Compania 2012</p>
+        <p>&copy; Compania Universitaria 2012</p>
       <?php endif;?>
       </footer>
     </div> <!-- /container -->
