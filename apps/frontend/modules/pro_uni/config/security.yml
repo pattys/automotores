@@ -3,5 +3,5 @@
 #aqui te permite loguiar todo tu proyecto que sea seguro.... lo cambias de
 #false a true.
 
-default:
-  is_secure: true 
+all:
+  is_secure: false

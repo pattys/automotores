@@ -1,7 +1,9 @@
 <ul class="nav">
-  <li class="active"><a href="<?php echo url_for("auto/index");?>">Autos</a></li>
+    <?php if($sf_user->isAuthenticated()): ?>
+    
+  <li><a href="<?php echo url_for("auto/index");?>">Autos</a></li>
   <li><a href="<?php echo url_for("chofer/index");?>">Choferes</a></li>
-  <li><a href="<?php echo url_for("salir/index");?>">Salir</a></li>
+   <li><a href="<?php echo url_for("default/salir");?>">Salir</a></li>
   <li class="dropdown">
     <!--<a<href="#" class="dropdown-toggle" data-toggle="dropdown">
       menu 4 <b class="caret"></b>
@@ -19,4 +21,8 @@
       </li>
     </ul>
   </li>
+  <?php else:?>
+  <li><a href="<?php echo url_for("auto/index");?>">iniciar sesion</a></li>
+ 
+  <?php endif;?>
 </ul>

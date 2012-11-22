@@ -8,9 +8,7 @@
       <th>Modelo</th>
       <th>Color</th>
       <th>Anio auto</th>
-      
       <th>Patente</th>
-      <th>Imagen</th>
       <th>Chasis</th>
       <th>Venc seguro</th>
       <th>Categoria</th>
@@ -23,9 +21,7 @@
       <td><?php echo $Autos->getModelo() ?></td>
       <td><?php echo $Autos->getColor() ?></td>
       <td><?php echo $Autos->getAnioAuto() ?></td>
-      
       <td><?php echo $Autos->getPatente() ?></td>
-      <td><?php echo $Autos->getImagen() ?></td>
       <td><?php echo $Autos->getChasis() ?></td>
       <td><?php echo $Autos->getVencSeguro() ?></td>
       <td><?php echo $Autos->getCategoria() ?></td>

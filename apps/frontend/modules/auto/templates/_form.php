@@ -49,11 +49,11 @@
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['Imagen']->renderLabel() ?></th>
+        <!--<th><?php echo $form['Imagen']->renderLabel() ?></th>
         <td>
           <?php echo $form['Imagen']->renderError() ?>
           <?php echo $form['Imagen'] ?>
-        </td>
+        </td>-->
       </tr>
       <tr>
         <th><?php echo $form['chasis']->renderLabel() ?></th>

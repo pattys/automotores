@@ -49,3 +49,4 @@ propel:
     Nombre: { phpName: Nombre, type: VARCHAR, size: '50', required: true }
     Contrasenia: { phpName: Contrasenia, type: VARCHAR, size: '15', required: true }
     Cargo: { phpName: Cargo, type: VARCHAR, size: '30', required: true }
+    Id: { phpName: Id, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
