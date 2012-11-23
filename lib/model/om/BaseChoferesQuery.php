@@ -11,12 +11,14 @@
  * @method     ChoferesQuery orderByDomicilio($order = Criteria::ASC) Order by the Domicilio column
  * @method     ChoferesQuery orderByVencimientoLic($order = Criteria::ASC) Order by the Vencimiento_Lic column
  * @method     ChoferesQuery orderByClase($order = Criteria::ASC) Order by the Clase column
+ * @method     ChoferesQuery orderById($order = Criteria::ASC) Order by the Id column
  *
  * @method     ChoferesQuery groupByNombre() Group by the Nombre column
  * @method     ChoferesQuery groupByLicencia() Group by the Licencia column
  * @method     ChoferesQuery groupByDomicilio() Group by the Domicilio column
  * @method     ChoferesQuery groupByVencimientoLic() Group by the Vencimiento_Lic column
  * @method     ChoferesQuery groupByClase() Group by the Clase column
+ * @method     ChoferesQuery groupById() Group by the Id column
  *
  * @method     ChoferesQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChoferesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -38,12 +40,14 @@
  * @method     Choferes findOneByDomicilio(string $Domicilio) Return the first Choferes filtered by the Domicilio column
  * @method     Choferes findOneByVencimientoLic(string $Vencimiento_Lic) Return the first Choferes filtered by the Vencimiento_Lic column
  * @method     Choferes findOneByClase(string $Clase) Return the first Choferes filtered by the Clase column
+ * @method     Choferes findOneById(int $Id) Return the first Choferes filtered by the Id column
  *
  * @method     array findByNombre(string $Nombre) Return Choferes objects filtered by the Nombre column
  * @method     array findByLicencia(int $Licencia) Return Choferes objects filtered by the Licencia column
  * @method     array findByDomicilio(string $Domicilio) Return Choferes objects filtered by the Domicilio column
  * @method     array findByVencimientoLic(string $Vencimiento_Lic) Return Choferes objects filtered by the Vencimiento_Lic column
  * @method     array findByClase(string $Clase) Return Choferes objects filtered by the Clase column
+ * @method     array findById(int $Id) Return Choferes objects filtered by the Id column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -134,7 +138,7 @@ abstract class BaseChoferesQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `NOMBRE`, `LICENCIA`, `DOMICILIO`, `VENCIMIENTO_LIC`, `CLASE` FROM `Choferes` WHERE `LICENCIA` = :p0';
+        $sql = 'SELECT `NOMBRE`, `LICENCIA`, `DOMICILIO`, `VENCIMIENTO_LIC`, `CLASE`, `ID` FROM `Choferes` WHERE `ID` = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -207,7 +211,7 @@ abstract class BaseChoferesQuery extends ModelCriteria
     public function filterByPrimaryKey($key)
     {
 
-        return $this->addUsingAlias(ChoferesPeer::LICENCIA, $key, Criteria::EQUAL);
+        return $this->addUsingAlias(ChoferesPeer::ID, $key, Criteria::EQUAL);
     }
 
     /**
@@ -220,7 +224,7 @@ abstract class BaseChoferesQuery extends ModelCriteria
     public function filterByPrimaryKeys($keys)
     {
 
-        return $this->addUsingAlias(ChoferesPeer::LICENCIA, $keys, Criteria::IN);
+        return $this->addUsingAlias(ChoferesPeer::ID, $keys, Criteria::IN);
     }
 
     /**
@@ -272,8 +276,22 @@ abstract class BaseChoferesQuery extends ModelCriteria
      */
     public function filterByLicencia($licencia = null, $comparison = null)
     {
-        if (is_array($licencia) && null === $comparison) {
-            $comparison = Criteria::IN;
+        if (is_array($licencia)) {
+            $useMinMax = false;
+            if (isset($licencia['min'])) {
+                $this->addUsingAlias(ChoferesPeer::LICENCIA, $licencia['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($licencia['max'])) {
+                $this->addUsingAlias(ChoferesPeer::LICENCIA, $licencia['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
         }
 
         return $this->addUsingAlias(ChoferesPeer::LICENCIA, $licencia, $comparison);
@@ -378,6 +396,33 @@ abstract class BaseChoferesQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(ChoferesPeer::CLASE, $clase, $comparison);
+    }
+
+    /**
+     * Filter the query on the Id column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterById(1234); // WHERE Id = 1234
+     * $query->filterById(array(12, 34)); // WHERE Id IN (12, 34)
+     * $query->filterById(array('min' => 12)); // WHERE Id > 12
+     * </code>
+     *
+     * @param     mixed $id The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChoferesQuery The current query, for fluid interface
+     */
+    public function filterById($id = null, $comparison = null)
+    {
+        if (is_array($id) && null === $comparison) {
+            $comparison = Criteria::IN;
+        }
+
+        return $this->addUsingAlias(ChoferesPeer::ID, $id, $comparison);
     }
 
     /**
@@ -540,7 +585,7 @@ abstract class BaseChoferesQuery extends ModelCriteria
     public function prune($choferes = null)
     {
         if ($choferes) {
-            $this->addUsingAlias(ChoferesPeer::LICENCIA, $choferes->getLicencia(), Criteria::NOT_EQUAL);
+            $this->addUsingAlias(ChoferesPeer::ID, $choferes->getId(), Criteria::NOT_EQUAL);
         }
 
         return $this;

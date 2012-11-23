@@ -24,10 +24,11 @@ propel:
   Choferes:
     _attributes: { phpName: Choferes, idMethod: native }
     Nombre: { phpName: Nombre, type: VARCHAR, size: '50', required: true }
-    Licencia: { phpName: Licencia, type: INTEGER, primaryKey: true, required: true }
+    Licencia: { phpName: Licencia, type: INTEGER, required: true, index: unique }
     Domicilio: { phpName: Domicilio, type: VARCHAR, size: '50', required: true }
     Vencimiento_Lic: { phpName: VencimientoLic, type: DATE, required: true }
     Clase: { phpName: Clase, type: CHAR, required: true, foreignTable: Categoria_Autos, foreignReference: Clase_Auto }
+    Id: { phpName: Id, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
     _indexes: { fk_Choferes_Categoria_Autos1: [Clase] }
   Estado_Auto:
     _attributes: { phpName: EstadoAuto, idMethod: native }
@@ -49,4 +50,3 @@ propel:
     Nombre: { phpName: Nombre, type: VARCHAR, size: '50', required: true }
     Contrasenia: { phpName: Contrasenia, type: VARCHAR, size: '15', required: true }
     Cargo: { phpName: Cargo, type: VARCHAR, size: '30', required: true }
-    Id: { phpName: Id, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }

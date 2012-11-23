@@ -32,16 +32,16 @@ class choferActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-    $Choferes = ChoferesQuery::create()->findPk($request->getParameter('licencia'));
-    $this->forward404Unless($Choferes, sprintf('Object Choferes does not exist (%s).', $request->getParameter('licencia')));
+    $Choferes = ChoferesQuery::create()->findPk($request->getParameter('id'));
+    $this->forward404Unless($Choferes, sprintf('Object Choferes does not exist (%s).', $request->getParameter('id')));
     $this->form = new ChoferesForm($Choferes);
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $Choferes = ChoferesQuery::create()->findPk($request->getParameter('licencia'));
-    $this->forward404Unless($Choferes, sprintf('Object Choferes does not exist (%s).', $request->getParameter('licencia')));
+    $Choferes = ChoferesQuery::create()->findPk($request->getParameter('id'));
+    $this->forward404Unless($Choferes, sprintf('Object Choferes does not exist (%s).', $request->getParameter('id')));
     $this->form = new ChoferesForm($Choferes);
 
     $this->processForm($request, $this->form);
@@ -53,8 +53,8 @@ class choferActions extends sfActions
   {
     $request->checkCSRFProtection();
 
-    $Choferes = ChoferesQuery::create()->findPk($request->getParameter('licencia'));
-    $this->forward404Unless($Choferes, sprintf('Object Choferes does not exist (%s).', $request->getParameter('licencia')));
+    $Choferes = ChoferesQuery::create()->findPk($request->getParameter('id'));
+    $this->forward404Unless($Choferes, sprintf('Object Choferes does not exist (%s).', $request->getParameter('id')));
     $Choferes->delete();
 
     $this->redirect('chofer/index');
@@ -67,7 +67,7 @@ class choferActions extends sfActions
     {
       $Choferes = $form->save();
 
-      $this->redirect('chofer/edit?licencia='.$Choferes->getLicencia());
+      $this->redirect('chofer/edit?id='.$Choferes->getId());
     }
   }
 }

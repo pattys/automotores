@@ -23,13 +23,13 @@ abstract class BaseChoferesPeer {
     const TM_CLASS = 'ChoferesTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 5;
+    const NUM_COLUMNS = 6;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 5;
+    const NUM_HYDRATE_COLUMNS = 6;
 
     /** the column name for the NOMBRE field */
     const NOMBRE = 'Choferes.NOMBRE';
@@ -45,6 +45,9 @@ abstract class BaseChoferesPeer {
 
     /** the column name for the CLASE field */
     const CLASE = 'Choferes.CLASE';
+
+    /** the column name for the ID field */
+    const ID = 'Choferes.ID';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -65,12 +68,12 @@ abstract class BaseChoferesPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Nombre', 'Licencia', 'Domicilio', 'VencimientoLic', 'Clase', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('nombre', 'licencia', 'domicilio', 'vencimientoLic', 'clase', ),
-        BasePeer::TYPE_COLNAME => array (self::NOMBRE, self::LICENCIA, self::DOMICILIO, self::VENCIMIENTO_LIC, self::CLASE, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('NOMBRE', 'LICENCIA', 'DOMICILIO', 'VENCIMIENTO_LIC', 'CLASE', ),
-        BasePeer::TYPE_FIELDNAME => array ('Nombre', 'Licencia', 'Domicilio', 'Vencimiento_Lic', 'Clase', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('Nombre', 'Licencia', 'Domicilio', 'VencimientoLic', 'Clase', 'Id', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('nombre', 'licencia', 'domicilio', 'vencimientoLic', 'clase', 'id', ),
+        BasePeer::TYPE_COLNAME => array (self::NOMBRE, self::LICENCIA, self::DOMICILIO, self::VENCIMIENTO_LIC, self::CLASE, self::ID, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('NOMBRE', 'LICENCIA', 'DOMICILIO', 'VENCIMIENTO_LIC', 'CLASE', 'ID', ),
+        BasePeer::TYPE_FIELDNAME => array ('Nombre', 'Licencia', 'Domicilio', 'Vencimiento_Lic', 'Clase', 'Id', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
     );
 
     /**
@@ -80,12 +83,12 @@ abstract class BaseChoferesPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Nombre' => 0, 'Licencia' => 1, 'Domicilio' => 2, 'VencimientoLic' => 3, 'Clase' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('nombre' => 0, 'licencia' => 1, 'domicilio' => 2, 'vencimientoLic' => 3, 'clase' => 4, ),
-        BasePeer::TYPE_COLNAME => array (self::NOMBRE => 0, self::LICENCIA => 1, self::DOMICILIO => 2, self::VENCIMIENTO_LIC => 3, self::CLASE => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('NOMBRE' => 0, 'LICENCIA' => 1, 'DOMICILIO' => 2, 'VENCIMIENTO_LIC' => 3, 'CLASE' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('Nombre' => 0, 'Licencia' => 1, 'Domicilio' => 2, 'Vencimiento_Lic' => 3, 'Clase' => 4, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('Nombre' => 0, 'Licencia' => 1, 'Domicilio' => 2, 'VencimientoLic' => 3, 'Clase' => 4, 'Id' => 5, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('nombre' => 0, 'licencia' => 1, 'domicilio' => 2, 'vencimientoLic' => 3, 'clase' => 4, 'id' => 5, ),
+        BasePeer::TYPE_COLNAME => array (self::NOMBRE => 0, self::LICENCIA => 1, self::DOMICILIO => 2, self::VENCIMIENTO_LIC => 3, self::CLASE => 4, self::ID => 5, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('NOMBRE' => 0, 'LICENCIA' => 1, 'DOMICILIO' => 2, 'VENCIMIENTO_LIC' => 3, 'CLASE' => 4, 'ID' => 5, ),
+        BasePeer::TYPE_FIELDNAME => array ('Nombre' => 0, 'Licencia' => 1, 'Domicilio' => 2, 'Vencimiento_Lic' => 3, 'Clase' => 4, 'Id' => 5, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
     );
 
     /**
@@ -164,12 +167,14 @@ abstract class BaseChoferesPeer {
             $criteria->addSelectColumn(ChoferesPeer::DOMICILIO);
             $criteria->addSelectColumn(ChoferesPeer::VENCIMIENTO_LIC);
             $criteria->addSelectColumn(ChoferesPeer::CLASE);
+            $criteria->addSelectColumn(ChoferesPeer::ID);
         } else {
             $criteria->addSelectColumn($alias . '.NOMBRE');
             $criteria->addSelectColumn($alias . '.LICENCIA');
             $criteria->addSelectColumn($alias . '.DOMICILIO');
             $criteria->addSelectColumn($alias . '.VENCIMIENTO_LIC');
             $criteria->addSelectColumn($alias . '.CLASE');
+            $criteria->addSelectColumn($alias . '.ID');
         }
     }
 
@@ -308,7 +313,7 @@ abstract class BaseChoferesPeer {
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getLicencia();
+                $key = (string) $obj->getId();
             } // if key === null
             self::$instances[$key] = $obj;
         }
@@ -331,7 +336,7 @@ abstract class BaseChoferesPeer {
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
             if (is_object($value) && $value instanceof Choferes) {
-                $key = (string) $value->getLicencia();
+                $key = (string) $value->getId();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
@@ -396,11 +401,11 @@ abstract class BaseChoferesPeer {
     public static function getPrimaryKeyHashFromRow($row, $startcol = 0)
     {
         // If the PK cannot be derived from the row, return NULL.
-        if ($row[$startcol + 1] === null) {
+        if ($row[$startcol + 5] === null) {
             return null;
         }
 
-        return (string) $row[$startcol + 1];
+        return (string) $row[$startcol + 5];
     }
 
     /**
@@ -415,7 +420,7 @@ abstract class BaseChoferesPeer {
     public static function getPrimaryKeyFromRow($row, $startcol = 0)
     {
 
-        return (int) $row[$startcol + 1];
+        return (int) $row[$startcol + 5];
     }
     
     /**
@@ -794,6 +799,10 @@ abstract class BaseChoferesPeer {
             $criteria = $values->buildCriteria(); // build Criteria from Choferes object
         }
 
+        if ($criteria->containsKey(ChoferesPeer::ID) && $criteria->keyContainsValue(ChoferesPeer::ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.ChoferesPeer::ID.')');
+        }
+
 
         // Set the correct dbName
         $criteria->setDbName(self::DATABASE_NAME);
@@ -832,10 +841,10 @@ abstract class BaseChoferesPeer {
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(ChoferesPeer::LICENCIA);
-            $value = $criteria->remove(ChoferesPeer::LICENCIA);
+            $comparison = $criteria->getComparison(ChoferesPeer::ID);
+            $value = $criteria->remove(ChoferesPeer::ID);
             if ($value) {
-                $selectCriteria->add(ChoferesPeer::LICENCIA, $value, $comparison);
+                $selectCriteria->add(ChoferesPeer::ID, $value, $comparison);
             } else {
                 $selectCriteria->setPrimaryTableName(ChoferesPeer::TABLE_NAME);
             }
@@ -914,7 +923,7 @@ abstract class BaseChoferesPeer {
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
-            $criteria->add(ChoferesPeer::LICENCIA, (array) $values, Criteria::IN);
+            $criteria->add(ChoferesPeer::ID, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
                 ChoferesPeer::removeInstanceFromPool($singleval);
@@ -998,7 +1007,7 @@ abstract class BaseChoferesPeer {
         }
 
         $criteria = new Criteria(ChoferesPeer::DATABASE_NAME);
-        $criteria->add(ChoferesPeer::LICENCIA, $pk);
+        $criteria->add(ChoferesPeer::ID, $pk);
 
         $v = ChoferesPeer::doSelect($criteria, $con);
 
@@ -1025,7 +1034,7 @@ abstract class BaseChoferesPeer {
             $objs = array();
         } else {
             $criteria = new Criteria(ChoferesPeer::DATABASE_NAME);
-            $criteria->add(ChoferesPeer::LICENCIA, $pks, Criteria::IN);
+            $criteria->add(ChoferesPeer::ID, $pks, Criteria::IN);
             $objs = ChoferesPeer::doSelect($criteria, $con);
         }
 
@@ -1041,7 +1050,7 @@ abstract class BaseChoferesPeer {
 	 */
 	static public function getUniqueColumnNames()
 	{
-	  return array();
+	  return array(array('Licencia'));
 	}
 
 	// symfony_behaviors behavior

@@ -9,12 +9,12 @@
  * @method     UsuariosQuery orderByNombre($order = Criteria::ASC) Order by the Nombre column
  * @method     UsuariosQuery orderByContrasenia($order = Criteria::ASC) Order by the Contrasenia column
  * @method     UsuariosQuery orderByCargo($order = Criteria::ASC) Order by the Cargo column
- * @method     UsuariosQuery orderById($order = Criteria::ASC) Order by the Id column
+ * @method     UsuariosQuery orderById($order = Criteria::ASC) Order by the id column
  *
  * @method     UsuariosQuery groupByNombre() Group by the Nombre column
  * @method     UsuariosQuery groupByContrasenia() Group by the Contrasenia column
  * @method     UsuariosQuery groupByCargo() Group by the Cargo column
- * @method     UsuariosQuery groupById() Group by the Id column
+ * @method     UsuariosQuery groupById() Group by the id column
  *
  * @method     UsuariosQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     UsuariosQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -26,12 +26,12 @@
  * @method     Usuarios findOneByNombre(string $Nombre) Return the first Usuarios filtered by the Nombre column
  * @method     Usuarios findOneByContrasenia(string $Contrasenia) Return the first Usuarios filtered by the Contrasenia column
  * @method     Usuarios findOneByCargo(string $Cargo) Return the first Usuarios filtered by the Cargo column
- * @method     Usuarios findOneById(int $Id) Return the first Usuarios filtered by the Id column
+ * @method     Usuarios findOneById(int $id) Return the first Usuarios filtered by the id column
  *
  * @method     array findByNombre(string $Nombre) Return Usuarios objects filtered by the Nombre column
  * @method     array findByContrasenia(string $Contrasenia) Return Usuarios objects filtered by the Contrasenia column
  * @method     array findByCargo(string $Cargo) Return Usuarios objects filtered by the Cargo column
- * @method     array findById(int $Id) Return Usuarios objects filtered by the Id column
+ * @method     array findById(int $id) Return Usuarios objects filtered by the id column
  *
  * @package    propel.generator.lib.model.om
  */
@@ -299,13 +299,13 @@ abstract class BaseUsuariosQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the Id column
+     * Filter the query on the id column
      *
      * Example usage:
      * <code>
-     * $query->filterById(1234); // WHERE Id = 1234
-     * $query->filterById(array(12, 34)); // WHERE Id IN (12, 34)
-     * $query->filterById(array('min' => 12)); // WHERE Id > 12
+     * $query->filterById(1234); // WHERE id = 1234
+     * $query->filterById(array(12, 34)); // WHERE id IN (12, 34)
+     * $query->filterById(array('min' => 12)); // WHERE id > 12
      * </code>
      *
      * @param     mixed $id The value to use as filter.

@@ -11,5 +11,8 @@ class ChoferesForm extends BaseChoferesForm
 {
   public function configure()
   {
+      //$this->widgetSchema['Licencia'] = new sfWidgetFormInputText();
+      
+      //$this->validatorSchema['Licencia'] = new sfValidatorInteger();
   }
 }

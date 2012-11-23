@@ -61,6 +61,12 @@ abstract class BaseChoferes extends BaseObject
     protected $clase;
 
     /**
+     * The value for the id field.
+     * @var        int
+     */
+    protected $id;
+
+    /**
      * @var        CategoriaAutos
      */
     protected $aCategoriaAutos;
@@ -170,6 +176,17 @@ abstract class BaseChoferes extends BaseObject
     {
 
         return $this->clase;
+    }
+
+    /**
+     * Get the [id] column value.
+     * 
+     * @return   int
+     */
+    public function getId()
+    {
+
+        return $this->id;
     }
 
     /**
@@ -284,6 +301,27 @@ abstract class BaseChoferes extends BaseObject
     } // setClase()
 
     /**
+     * Set the value of [id] column.
+     * 
+     * @param      int $v new value
+     * @return   Choferes The current object (for fluent API support)
+     */
+    public function setId($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->id !== $v) {
+            $this->id = $v;
+            $this->modifiedColumns[] = ChoferesPeer::ID;
+        }
+
+
+        return $this;
+    } // setId()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -320,6 +358,7 @@ abstract class BaseChoferes extends BaseObject
             $this->domicilio = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->vencimiento_lic = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->clase = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->id = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -328,7 +367,7 @@ abstract class BaseChoferes extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 5; // 5 = ChoferesPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 6; // 6 = ChoferesPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Choferes object", $e);
@@ -602,6 +641,10 @@ abstract class BaseChoferes extends BaseObject
         $modifiedColumns = array();
         $index = 0;
 
+        $this->modifiedColumns[] = ChoferesPeer::ID;
+        if (null !== $this->id) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . ChoferesPeer::ID . ')');
+        }
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(ChoferesPeer::NOMBRE)) {
@@ -618,6 +661,9 @@ abstract class BaseChoferes extends BaseObject
         }
         if ($this->isColumnModified(ChoferesPeer::CLASE)) {
             $modifiedColumns[':p' . $index++]  = '`CLASE`';
+        }
+        if ($this->isColumnModified(ChoferesPeer::ID)) {
+            $modifiedColumns[':p' . $index++]  = '`ID`';
         }
 
         $sql = sprintf(
@@ -645,6 +691,9 @@ abstract class BaseChoferes extends BaseObject
                     case '`CLASE`':
 						$stmt->bindValue($identifier, $this->clase, PDO::PARAM_STR);
                         break;
+                    case '`ID`':
+						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
+                        break;
                 }
             }
             $stmt->execute();
@@ -652,6 +701,13 @@ abstract class BaseChoferes extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
+
+        try {
+			$pk = $con->lastInsertId();
+        } catch (Exception $e) {
+            throw new PropelException('Unable to get autoincrement id.', $e);
+        }
+        $this->setId($pk);
 
         $this->setNew(false);
     }
@@ -807,6 +863,9 @@ abstract class BaseChoferes extends BaseObject
             case 4:
                 return $this->getClase();
                 break;
+            case 5:
+                return $this->getId();
+                break;
             default:
                 return null;
                 break;
@@ -841,6 +900,7 @@ abstract class BaseChoferes extends BaseObject
             $keys[2] => $this->getDomicilio(),
             $keys[3] => $this->getVencimientoLic(),
             $keys[4] => $this->getClase(),
+            $keys[5] => $this->getId(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->aCategoriaAutos) {
@@ -898,6 +958,9 @@ abstract class BaseChoferes extends BaseObject
             case 4:
                 $this->setClase($value);
                 break;
+            case 5:
+                $this->setId($value);
+                break;
         } // switch()
     }
 
@@ -927,6 +990,7 @@ abstract class BaseChoferes extends BaseObject
         if (array_key_exists($keys[2], $arr)) $this->setDomicilio($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setVencimientoLic($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setClase($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
     }
 
     /**
@@ -943,6 +1007,7 @@ abstract class BaseChoferes extends BaseObject
         if ($this->isColumnModified(ChoferesPeer::DOMICILIO)) $criteria->add(ChoferesPeer::DOMICILIO, $this->domicilio);
         if ($this->isColumnModified(ChoferesPeer::VENCIMIENTO_LIC)) $criteria->add(ChoferesPeer::VENCIMIENTO_LIC, $this->vencimiento_lic);
         if ($this->isColumnModified(ChoferesPeer::CLASE)) $criteria->add(ChoferesPeer::CLASE, $this->clase);
+        if ($this->isColumnModified(ChoferesPeer::ID)) $criteria->add(ChoferesPeer::ID, $this->id);
 
         return $criteria;
     }
@@ -958,7 +1023,7 @@ abstract class BaseChoferes extends BaseObject
     public function buildPkeyCriteria()
     {
         $criteria = new Criteria(ChoferesPeer::DATABASE_NAME);
-        $criteria->add(ChoferesPeer::LICENCIA, $this->licencia);
+        $criteria->add(ChoferesPeer::ID, $this->id);
 
         return $criteria;
     }
@@ -969,18 +1034,18 @@ abstract class BaseChoferes extends BaseObject
      */
     public function getPrimaryKey()
     {
-        return $this->getLicencia();
+        return $this->getId();
     }
 
     /**
-     * Generic method to set the primary key (licencia column).
+     * Generic method to set the primary key (id column).
      *
      * @param       int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setLicencia($key);
+        $this->setId($key);
     }
 
     /**
@@ -990,7 +1055,7 @@ abstract class BaseChoferes extends BaseObject
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getLicencia();
+        return null === $this->getId();
     }
 
     /**
@@ -1007,6 +1072,7 @@ abstract class BaseChoferes extends BaseObject
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setNombre($this->getNombre());
+        $copyObj->setLicencia($this->getLicencia());
         $copyObj->setDomicilio($this->getDomicilio());
         $copyObj->setVencimientoLic($this->getVencimientoLic());
         $copyObj->setClase($this->getClase());
@@ -1030,7 +1096,7 @@ abstract class BaseChoferes extends BaseObject
 
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setLicencia(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setId(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -1345,6 +1411,7 @@ abstract class BaseChoferes extends BaseObject
         $this->domicilio = null;
         $this->vencimiento_lic = null;
         $this->clase = null;
+        $this->id = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->clearAllReferences();

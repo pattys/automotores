@@ -1059,7 +1059,9 @@ abstract class BaseEstadoAuto extends BaseObject
     public function getChoferes(PropelPDO $con = null)
     {
         if ($this->aChoferes === null && ($this->conductor !== null)) {
-            $this->aChoferes = ChoferesQuery::create()->findPk($this->conductor, $con);
+            $this->aChoferes = ChoferesQuery::create()
+                ->filterByEstadoAuto($this) // here
+                ->findOne($con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be

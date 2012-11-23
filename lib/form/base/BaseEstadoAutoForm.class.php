@@ -15,7 +15,7 @@ abstract class BaseEstadoAutoForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'Auto'           => new sfWidgetFormInputHidden(),
-      'Conductor'      => new sfWidgetFormPropelChoice(array('model' => 'Choferes', 'add_empty' => true)),
+      'Conductor'      => new sfWidgetFormPropelChoice(array('model' => 'Choferes', 'add_empty' => true, 'key_method' => 'getLicencia')),
       'Disponibilidad' => new sfWidgetFormInputText(),
       'Destino'        => new sfWidgetFormInputText(),
     ));

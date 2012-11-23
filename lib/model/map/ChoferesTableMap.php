@@ -36,13 +36,14 @@ class ChoferesTableMap extends TableMap
         $this->setPhpName('Choferes');
         $this->setClassname('Choferes');
         $this->setPackage('lib.model');
-        $this->setUseIdGenerator(false);
+        $this->setUseIdGenerator(true);
         // columns
         $this->addColumn('NOMBRE', 'Nombre', 'VARCHAR', true, 50, null);
-        $this->addPrimaryKey('LICENCIA', 'Licencia', 'INTEGER', true, null, null);
+        $this->addColumn('LICENCIA', 'Licencia', 'INTEGER', true, null, null);
         $this->addColumn('DOMICILIO', 'Domicilio', 'VARCHAR', true, 50, null);
         $this->addColumn('VENCIMIENTO_LIC', 'VencimientoLic', 'DATE', true, null, null);
         $this->addForeignKey('CLASE', 'Clase', 'CHAR', 'Categoria_Autos', 'CLASE_AUTO', true, null, null);
+        $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         // validators
     } // initialize()
 

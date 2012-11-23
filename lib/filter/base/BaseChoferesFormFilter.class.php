@@ -13,6 +13,7 @@ abstract class BaseChoferesFormFilter extends BaseFormFilterPropel
   {
     $this->setWidgets(array(
       'Nombre'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'Licencia'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'Domicilio'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'Vencimiento_Lic' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'Clase'           => new sfWidgetFormPropelChoice(array('model' => 'CategoriaAutos', 'add_empty' => true, 'key_method' => 'getClaseAuto')),
@@ -20,6 +21,7 @@ abstract class BaseChoferesFormFilter extends BaseFormFilterPropel
 
     $this->setValidators(array(
       'Nombre'          => new sfValidatorPass(array('required' => false)),
+      'Licencia'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'Domicilio'       => new sfValidatorPass(array('required' => false)),
       'Vencimiento_Lic' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'Clase'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'CategoriaAutos', 'column' => 'Clase_Auto')),
@@ -45,6 +47,7 @@ abstract class BaseChoferesFormFilter extends BaseFormFilterPropel
       'Domicilio'       => 'Text',
       'Vencimiento_Lic' => 'Date',
       'Clase'           => 'ForeignKey',
+      'Id'              => 'Number',
     );
   }
 }

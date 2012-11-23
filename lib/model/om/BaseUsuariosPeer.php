@@ -66,7 +66,7 @@ abstract class BaseUsuariosPeer {
         BasePeer::TYPE_STUDLYPHPNAME => array ('nombre', 'contrasenia', 'cargo', 'id', ),
         BasePeer::TYPE_COLNAME => array (self::NOMBRE, self::CONTRASENIA, self::CARGO, self::ID, ),
         BasePeer::TYPE_RAW_COLNAME => array ('NOMBRE', 'CONTRASENIA', 'CARGO', 'ID', ),
-        BasePeer::TYPE_FIELDNAME => array ('Nombre', 'Contrasenia', 'Cargo', 'Id', ),
+        BasePeer::TYPE_FIELDNAME => array ('Nombre', 'Contrasenia', 'Cargo', 'id', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
@@ -81,7 +81,7 @@ abstract class BaseUsuariosPeer {
         BasePeer::TYPE_STUDLYPHPNAME => array ('nombre' => 0, 'contrasenia' => 1, 'cargo' => 2, 'id' => 3, ),
         BasePeer::TYPE_COLNAME => array (self::NOMBRE => 0, self::CONTRASENIA => 1, self::CARGO => 2, self::ID => 3, ),
         BasePeer::TYPE_RAW_COLNAME => array ('NOMBRE' => 0, 'CONTRASENIA' => 1, 'CARGO' => 2, 'ID' => 3, ),
-        BasePeer::TYPE_FIELDNAME => array ('Nombre' => 0, 'Contrasenia' => 1, 'Cargo' => 2, 'Id' => 3, ),
+        BasePeer::TYPE_FIELDNAME => array ('Nombre' => 0, 'Contrasenia' => 1, 'Cargo' => 2, 'id' => 3, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 

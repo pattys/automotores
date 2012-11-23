@@ -12,7 +12,7 @@ abstract class BaseEstadoAutoFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'Conductor'      => new sfWidgetFormPropelChoice(array('model' => 'Choferes', 'add_empty' => true)),
+      'Conductor'      => new sfWidgetFormPropelChoice(array('model' => 'Choferes', 'add_empty' => true, 'key_method' => 'getLicencia')),
       'Disponibilidad' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'Destino'        => new sfWidgetFormFilterInput(),
     ));
